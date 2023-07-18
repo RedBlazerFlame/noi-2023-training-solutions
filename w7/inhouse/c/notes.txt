@@ -1,0 +1,61 @@
+First observation: you need at least n - 1 wires to solder everything
+Second observation: the optimal answer has exactly n - 1 wires
+Why?
+Just remove the ones that cause cycles, and graph still connected
+ooga booga
+
+This is bitmask DP, right?
+
+Say we have a subset we want to connect
+
+dp(S) = min()
+
+Shoot, wires must not intersect or overlap
+Okay, new plan! Go through all permutations of nodes
+Connect each of them
+Check if any of the wires are intersecting
+if they are, then oops
+else min the answer
+
+Fast way to check if two line segments intersect?
+
+Denote a line to be a point and a vector
+l: (p, v)
+p + kv for k in [0, 1]
+
+l1: (p1, v1)
+l2: (p2, v2)
+
+p1 + k1v1 = p2 + k2v2
+
+p1 - p2 = k2v2 - k1v1
+
+<p_1x + k_1 v_1x, p_1y + k_1 v_1y> = <p_2x + k_2 v_2x, p_2y + k_2 v_2y>
+
+p_1x + k_1
+
+AHA
+
+I figured it out!
+
+Simplify: translate everything by -p1
+
+Let the translated starting point of line 2 be p2t and the end be e2t
+Take the dot product of these two with e1t
+Check that they're both positive and less than the magnitude of e1t
+(Okay, nevermind, it seems like we don't need to do this)
+
+Then, take the dot product of these two with the rotated version of e1t
+Check if their signs are opposite
+If one sign is positive and the other is negative, there is a potential intersection
+If both have the same (nonzero) sign, then there is no potential intersection
+If exactly one dot product is zero, that's not an intersection
+If both perp dot products are zero, there is a potential intersection if
+the bounding boxes intersect.
+The bounding boxes intersect if the area of their intersection is strictly greater than 0
+If dx = 0 or dy = 0, the bounding boxes intersect if the lines strictly intersect
+If both are zero, there's no intersection
+
+No, this won't work .-.
+Oh wait it will, if we check it both ways
+Yep, that works

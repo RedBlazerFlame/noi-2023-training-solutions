@@ -1,0 +1,8 @@
+This is a convolution
+It may be possible to use matrix magic
+
+000101
+
+1100010111 (C)
+
+100....001

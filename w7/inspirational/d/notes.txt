@@ -1,0 +1,9 @@
+Idea: go through every pair of two points
+I can matrix multiply by:
+
+----
+0 -1
+1 0
+----
+
+Or, just do (-y, x) haha

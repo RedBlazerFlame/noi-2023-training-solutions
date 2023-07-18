@@ -1,0 +1,199 @@
+#!/usr/bin/env pypy3.9
+
+"""Testing script for inhouse.
+
+Run this as ./install_test
+"""
+
+from contextlib import contextmanager
+
+class TestError(Exception):
+    def __init__(self,  message, *args, **kwargs):
+        self.message = message
+        super().__init__(*args, **kwargs)
+
+
+def colored(text, *args, **kwargs): return text
+
+try:
+    import colorama
+except ImportError: 
+    pass
+else:
+    colorama.init()
+    try:
+        from termcolor import colored
+    except ImportError:
+        pass
+try:
+    from PIL import Image, ImageColor, ImageDraw
+except ImportError:
+    pass
+
+
+@contextmanager
+def testing():
+    try:
+        try:
+            print(colored('='*72, color='cyan'))
+            yield
+        finally:
+            print(colored('='*72, color='cyan'))
+            print()
+    except TestError as exc:
+        print(colored("!!!!  FAILED  !!!!", color='red'))
+        print(colored(exc.message, color='red'))
+        exit(1)
+    except Exception as exc:
+        import traceback
+        print(colored("!!!!  FAILED  !!!!", color='red'))
+        print(colored("Error log:", color='red'))
+        traceback.print_exc()
+        print(colored("This shouldn't happen. If it did, please tell us! (Please send the error log above.)", color='red'))
+        exit(2)
+    else:
+        print(colored("Follow the instructions above.", color='green'))
+        print(colored("Let me know if everything is ok!", color='green'))
+    finally:
+        print()
+
+
+@contextmanager
+def testing_context(context):
+    try:
+        print()
+        print()
+        print(colored(context, color='blue'))
+        print(colored('-'*70, color='blue'))
+        yield
+    finally:
+        print(colored('-'*70, color='blue'))
+        print()
+        print()
+
+
+def print_instructions(inst):
+
+    inst = f"   {inst}   "
+    b = f"!!!{' '*len(inst)}!!!"
+    inst = f"!!!{inst}!!!"
+
+    print()
+    print(colored('!'*len(inst), color='yellow'))
+    print(colored(b, color='yellow'))
+    print(colored(inst, color='yellow'))
+    print(colored(b, color='yellow'))
+    print(colored('!'*len(inst), color='yellow'))
+    print()
+
+
+def install_test():
+    with testing():
+        with testing_context("Testing PyPy version"):
+
+            import platform
+            print("Using", colored(platform.python_implementation(), color='green'))
+            if platform.python_implementation() != 'PyPy':
+                raise TestError(f"Implementation must be PyPy, not {platform.python_implementation()}")
+
+            import sys
+            print("Python version is", colored(platform.python_version(), color='green'))
+            print("Python version is", colored(sys.version, color='green'))
+            print("Python version is", colored(sys.version_info, color='green'))
+
+            major, minor, *rest = sys.version_info
+            if (major, minor) < (3, 9):
+                raise TestError("Version must be at least 3.9")
+
+            try:
+                {} | {} # test a python3.9 feature
+            except TypeError:
+                raise TestError("Version must be >= 3.9")
+
+
+        with testing_context("Checking if the needed libraries are present"):
+            print(f"Checking if '{colored('colorama', color='green')}' is present")
+            try:
+                from colorama import init as _init
+            except ImportError: 
+                raise TestError("Library 'colorama'/'termcolor' not found!")
+
+            print(f"Checking if '{colored('termcolor', color='green')}' is present")
+            try:
+                from termcolor import colored as _colored
+            except ImportError:
+                raise TestError("Library 'termcolor' not found!")
+
+            print(f"Checking if '{colored('Pillow', color='green')}' is present")
+            try:
+                from PIL import Image as _Image, ImageColor as _ImageColor, ImageDraw as _ImageDraw
+            except ImportError:
+                raise TestError("Library 'Pillow' not found!")
+
+
+        with testing_context("Testing colors"):
+            print()
+            print('Checking colors')
+            color_codes = {
+                'blue': '4',
+                'green': '2',
+                'red': '1',
+                'yellow': '3',
+                'cyan': '6',
+            }
+            for it in range(2):
+                print()
+                print('This should be normal-colored!')
+                for color, idx in color_codes.items(): print(f"\033[3{idx}mThis should be {color}!\033[0m")
+                print('This should be normal-colored!')
+                for color, idx in color_codes.items(): print(f"\033[0;3{idx}mThis should be {color}!\033[0m")
+                print('This should be normal-colored!')
+                for color, idx in color_codes.items(): print(f"\033[0;3{idx}mThis should be {color}!")
+                print(end='\033[0m')
+                print('This should be normal-colored!')
+                for color, idx in color_codes.items(): print(colored(f"This should be {color}!", color=color))
+                print('This should be normal-colored!')
+                print("This should be", *(f"\033[3{idx}m{color}" for color, idx in color_codes.items()), end='\033[0m\n')
+                print('This should be normal-colored!')
+                print("This should be", *(f"\033[3{idx}m{color}\033[0m" for color, idx in color_codes.items()))
+                print('This should be normal-colored!')
+                print("This should be", *(colored(color, color=color) for color in color_codes))
+                print('This should be normal-colored!')
+                print("This should be", *(f"\033[9{idx}m{color}\033[0m" for color, idx in color_codes.items()), "\033[0m(slightly different shades)")
+                print('This should be normal-colored!')
+            
+            print_instructions("Check if the colors above are correct!")
+
+
+        with testing_context("Creating test image"):
+            RED = ImageColor.getcolor('#ff0000', 'RGB')
+            BLUE = ImageColor.getcolor('#0000ff', 'RGB')
+
+            filename = 'install_test_image_12345.png'
+
+            print()
+            print("Creating the image")
+
+            dd = 150
+
+            img = Image.new('RGB', (dd, dd), color='white')
+            draw = ImageDraw.Draw(img)
+
+            m = 20
+            w = 6
+            r = 20
+            draw.line([(m + w, m + w), (dd - w - m, dd - w - m)], fill=RED, width=w)
+            draw.line([(m + w, dd - w - m), (dd - w - m, m + w)], fill=RED, width=w)
+            x = dd // 2
+            y = dd - w - m
+            draw.ellipse([(x-r, y-r), (x+r, y+r)], outline=BLUE, width=w)
+
+
+            print(f"Saving image at", colored(filename, color='green'))
+            img.save(filename)
+            print(f"Saved image at", colored(filename, color='green'))
+            print_instructions(f"Open {filename}. You should see a red X and a blue O.")
+
+
+if __name__ == '__main__':
+    install_test()

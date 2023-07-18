@@ -1,0 +1,10 @@
+Dijkstra from infected cities to everywhere:
+O(M log M), should pass
+
+Then, we can sort the nodes by decreasing distance, right?
+We then add them one by one
+Every time we add a node, we try to add its edges too
+
+Idea for full points (woah!)
+Construct the dual graph of the 
+Okay nevermind the dual graph is very big

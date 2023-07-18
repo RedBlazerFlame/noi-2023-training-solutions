@@ -1,0 +1,34 @@
+Let your sequence be a_i
+
+Basically,
+all arithmetic sequences in i with length 3
+cannot have the same dessert
+
+Yoo I have a potential solution
+
+KKYKYKYKYKK
+iii
+  iii
+    iii
+      iii
+        iii
+i i i
+ i i i
+  i i i
+i  i  i
+
+Nevermind I don't ;-;
+
+
+iii
+i i i
+i  i  i
+i   i   i
+
+
+What about an easier case?
+
+ii
+i i
+i  i
+i   i

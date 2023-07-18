@@ -1,0 +1,9 @@
+#RRRRR
+
+5 + 4 + 3 + 2 + 1
+
+#RRRRR
+#RRRRR
+(2 + 1)(5 + 4 + 3 + 2 + 1)
+
+So subtask one is bin search

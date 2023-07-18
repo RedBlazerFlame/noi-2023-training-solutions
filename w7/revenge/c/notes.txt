@@ -1,0 +1,19 @@
+b a b NAND AND == a b BLAND
+
+a b res
+0 0 0
+0 1 1
+1 0 0
+1 1 0
+
+a a b NAND NAND == a b BLOR
+
+a b res
+0 0 1
+0 1 1
+1 0 0
+1 1 1
+
+a b BLAND
+
+x0 NOT = x0 x0 x0 BLAND BLOR

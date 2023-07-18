@@ -1,0 +1,12 @@
+How can a house not be gifted?
+
+If the minimum age x > a
+OR if the maximum age y < b
+
+In other words, if [x, y] is a proper subinterval of [a, b]
+But not gifting is the same as subtracting a gift
+(and then we can just add the total gift
+via a global variable)
+
+This is hard, the only way I could think of is using a 2d segtree
+

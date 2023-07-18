@@ -1,0 +1,19 @@
+This is essentially sorting over
+any subsequence
+
+OH DEAR SIR KEVIN WROTE THIS
+Aight time to cry
+
+4 3 2 1
+
+3 4 1 2
+1 2 3 4
+
+Counter:
+4 2 3 1
+2 4 1 3
+1 3 2 4
+
+d must be less than 2000
+The max inversion count for 700
+would be 699 * 698 / 2 = 243951, not good

@@ -1,0 +1,26 @@
+This is essentially sorting
+
+6 5 4 3 2 1
+
+getNextLightest essentially finds the insert order of a number, right?
+
+Doing lightest and median
+on three numbers gives us the
+ordered subsequence of those three
+numbers
+
+1 2 3 4 5 6
+
+1 2 3 4 5 6
+  X X   X
+
+(Q = 4 so far)
+
+Compare the mins of each sublist
+and merge sort?
+
+1 2 3 4 5 6
+  X X X
+
+1 4 6
+2 3 5

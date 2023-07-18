@@ -1,0 +1,8 @@
+So essentially, find the sum of
+four elements of a list that is as close as possible
+to M but less than it?
+
+Target solution is O(n^2) or smth
+
+Oh, what if we get the pairwise sum
+and then bin search the other one?

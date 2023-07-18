@@ -1,0 +1,63 @@
+In other words...
+
+(n - k)k = qn
+
+1 > 2
+0 0
+
+2 > 2
+0 1/2 0
+
+3 > 2
+0 2/3 2/3 0
+
+4 > 3
+0 3/4 4/4 3/4 0
+
+5 > 2
+0 4/5 6/5 6/5 4/5 0
+
+6 > 2
+0 5/6 8/6 9/6 8/6 5/6 0
+
+
+n = 6
+XXXXX
+XXXX
+XXX
+XX
+X
+
+n = 9
+XXXXXXXX
+XXXXXXX
+XXXXXX
+XXXXX
+XXXX
+XXX
+XX
+X
+
+insight 1:
+if n = k^2
+i = k works
+
+n = 
+
+2, 8, 26, 80
+
+1, 4, 13, 40, 242, 728
+
+k must be a factor of n
+
+so n - k must be a multiple of n / k
+
+Count the number of the factors of n that:
+n - k 
+
+3^6 -> 3^3 - 1
+
+p^q -> p^(q // 2) - 1
+
+given prime factorization a1^p1 * a2^p2 * ... * an^pn, the answer is:
+Answer: a1^(p1/2) * a2^(p2/2) * ... * an^(pn / 2) + 1

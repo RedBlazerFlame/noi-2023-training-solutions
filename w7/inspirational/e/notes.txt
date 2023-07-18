@@ -1,0 +1,27 @@
+ABRACADABRA
+ECADADABRBCRDARA
+
+Instead of the longest substring, we can get the 
+length of the longest prefix/suffix
+
+And then add 1 if the first letters are equal, right?
+
+So the length of the longest suffix problem is not too bad
+you can do it within O(min(|s|, |t|)) time
+
+OOOOOOOX
+OOOOOOOOOOX
+->
+OOOOOOX
+OOOOOOOOOX
+->
+...
+X
+OOOX
+
+OOOOOOOX
+OOOOOOOOOX
+->
+...
+X
+OOX

@@ -1,0 +1,5 @@
+1 - Probably some math magic
+2 - This seems like union find
+3 - Is this brute forceable?
+4 - Solve the easy version first:
+count the number of rectangles

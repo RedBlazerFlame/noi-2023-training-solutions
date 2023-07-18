@@ -1,0 +1,17 @@
+AAAAAAAAAA
+okay so...
+  OIOOI
+ --
+O -
+O -XX
+I   XXX
+O     X
+I     X
+
+  OIOOI
+ 001201
+O001201
+O001201 
+I111201     
+O223401     
+I3     
