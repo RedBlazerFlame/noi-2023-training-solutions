@@ -6,3 +6,8 @@ Suppose that $n > d$. Then that means that there is some point at which the firs
 
 ## N2
 ![N2 Counterexample](assets/n2.png)
+
+## N3a
+$\frac{11}{28}$
+
+The greedy algorithm outputs $\frac{1}{3} + \frac{1}{17} + \frac{1}{1428}$, but the correct answer is $\frac{1}{4} + \frac{1}{7}$
